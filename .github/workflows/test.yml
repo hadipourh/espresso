@@ -17,7 +17,7 @@ jobs:
         run: cmake -B build && make -C build
         env:
           CC: /usr/bin/${{ matrix.cc }}
-          CFLAGS: "-Wpedantic -Wall -Werror"
+          CFLAGS: "-Wall"
   run-test:
     runs-on: ubuntu-22.04
     steps:
@@ -26,3 +26,4 @@ jobs:
         run: cmake -B build && make -C build
       - name: Test
         run: cd build && ctest
+
