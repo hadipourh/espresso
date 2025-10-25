@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        cc: [clang, gcc]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: cmake -B build && make -C build
+        env:
+          CC: /usr/bin/${{ matrix.cc }}
+          CFLAGS: "-Wpedantic -Wall -Werror"
+  run-test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: cmake -B build && make -C build
+      - name: Test
+        run: cd build && ctest
