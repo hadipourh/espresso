@@ -34,7 +34,7 @@ jobs:
           artifacts: "*espresso"
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
-          draft: true
+          draft: false
   build-macos:
     runs-on: macos-14
     steps:
@@ -58,5 +58,5 @@ jobs:
           artifacts: "*espresso"
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
-          draft: true
+          draft: false
 
