@@ -158,9 +158,11 @@ A comprehensive test script is provided to verify the correctness of the impleme
 
 ```
 Total files: 183
-Total tests run: ~450+ (multiple modes per file)
-Successful: ~448
-Timed out: ~2
+Total tests run: 369 (multiple modes per file)
+Unique modes tested: 7
+Successful tests: 369
+Failed: 0
+Timed out: 0
 
 Final combined hash (sha256):
 53f911764ba4d1799b25b43c20b23f08abe0df036fa8c76cccaf3854b8d7dd56
