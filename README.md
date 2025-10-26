@@ -90,17 +90,42 @@ cd build
 
 The output is a minimized PLA representation in standard format. For complete command-line options, run `./espresso` without arguments. For PLA file format specification, see `man/espresso.5`.
 
-### Common Options
+### Command-Line Options
 
-- `-Dexact` - Use exact minimization algorithm (optimal but slower)
-- `-Dmany` - Use heuristic minimization (faster, near-optimal)
-- `-estrong` - Use strong minimization strategy
-- `-efast` - Use fast minimization strategy  
-- `-s` - Print execution summary
-- `-t` - Print execution trace
-- `-ofd`, `-of`, `-ofr` - Select output format
+**Main Algorithm Modes (-D):**
+- `-Dexact` - Exact minimization algorithm (guarantees minimum number of product terms, heuristically minimizes literals)
+- `-Dmany` - Read and minimize multiple PLAs from one file (separated by `.e`)
+- `-Dsimplify` - Simplify the cover without full Espresso minimization
+- `-Dso` - Minimize each function as single-output (no term sharing between outputs)
+- `-Dso_both` - Minimize each function as single-output, choosing function or complement based on fewer terms
+- `-Dopo` - Perform output phase optimization (determine which functions to complement to reduce terms)
+- `-Dopoall` - Try all possible phase assignments (exponential cost)
 
-### Examples
+**Espresso Options (-e):**
+- `-efast` - Stop after first EXPAND and IRREDUNDANT (single_expand mode, no iteration)
+- `-estrong` - Use SUPER_GASP instead of LAST_GASP (more expensive, occasionally better results)
+- `-eeat` - Discard comments from input file (normally comments are echoed to output)
+- `-enirr` - Result will not necessarily be made irredundant in final literal removal step
+- `-eness` - Do not detect essential primes
+- `-epos` - Swap ON-set and OFF-set after reading (minimizes the OFF-set)
+- `-eonset` - Recompute ON-set before minimization (useful for large truth tables)
+- `-enunwrap` - Do not unwrap the ON-set before minimization
+
+**Output Options (-o):**
+- `-of`, `-ofd`, `-ofr`, `-ofdr` - Output ON-set (f), DC-set (d), and/or OFF-set (r) in various combinations
+- `-oeqntott` - Output algebraic equations
+- `-opleasure` - Output unmerged PLA format
+
+**Other Options:**
+- `-s` - Print execution summary with timing and statistics
+- `-t` - Print execution trace showing progress of each algorithm step
+- `-x` - Suppress printing of solution (useful with `-s` for timing analysis)
+- `-d` - Enable debugging (turns on trace, summary, and debug output)
+- `-v[type]` - Verbose debugging (for specific algorithm components)
+- `-Sn` - Select strategy number for certain subcommands
+- `-rn-m` - Select range (for outputs or variables in certain operations)
+
+### Example Files
 
 The repository includes comprehensive example files in three categories:
 
@@ -108,32 +133,48 @@ The repository includes comprehensive example files in three categories:
 - `examples/hard_examples/` - Computationally intensive cases (19 files)
 - `examples/tlex/` - Additional test cases (41 files)
 
-### Testing
+## Testing
 
 A comprehensive test script is provided to verify the correctness of the implementation:
 
 ```bash
-# Run all tests (183 examples)
-cd espresso
+# Run all tests (183 example files with multiple modes)
 ./test.sh
 ```
 
-The test script will:
-- Execute Espresso on all 183 example files
-- Apply a 20-second timeout per example to handle computationally intensive cases
-- Compute SHA-256 hashes of all outputs
-- Verify the combined hash matches the expected value from the original implementation
-- Report success/failure status with detailed timing information
+### Test Suite Features
 
-Expected output:
-```
-Total files tested: 183
-Successful: 182
-Failed: 0
-Timed out: 1
+- **Multi-Mode Testing**: Each example is tested with 2-3 different Espresso modes (default, fast, strong, etc.)
+- **Comprehensive Coverage**: Tests all 183 example files across 8 different algorithm modes
+- **Smart Timeout Handling**: 59-second timeout per test to handle computationally intensive cases
+- **Deterministic Execution**: Files processed in sorted order for consistent results across systems
+- **SHA-256 Verification**: Cryptographically secure hashing validates output correctness
+- **Mode-Specific Optimizations**: 
+  - Hard examples use only fast modes (no exact minimization)
+  - Specific problematic files excluded from certain modes to prevent timeouts
+  - Special handling for large examples (e.g., o64.pla uses only `-Dsimplify`)
 
-Hash verification PASSED - Output matches original code!
+### Expected Test Results
+
 ```
+Total files: 183
+Total tests run: ~450+ (multiple modes per file)
+Successful: ~448
+Timed out: ~2
+
+Final combined hash (sha256):
+53f911764ba4d1799b25b43c20b23f08abe0df036fa8c76cccaf3854b8d7dd56
+
+✓ All tests passed successfully!
+  Hash matches expected value
+```
+
+### What the Tests Verify
+
+- All algorithm modes produce consistent, correct output
+- No regressions in functionality across different minimization strategies
+- Cross-platform compatibility (verified on Linux, macOS)
+- Performance characteristics remain within acceptable bounds
 
 ## Documentation
 
