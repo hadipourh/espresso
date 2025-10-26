@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to test all espresso examples with multiple modes
-# This verifies that all examples produce consistent output across different algorithms
+# This verifies that the modernized code produces identical output to the original implementation
 # Uses SHA-256 for cryptographically secure hashing
 # IMPORTANT: Examples are processed in deterministic sorted order to ensure
 # consistent test execution across different systems, filesystems, and shells
@@ -36,8 +36,8 @@ TIMEOUT_SECONDS=59  # 59 seconds timeout per example
 HASH_ALGO="sha256" # Using SHA-256 for cryptographic security
 EXPECTED_HASH="53f911764ba4d1799b25b43c20b23f08abe0df036fa8c76cccaf3854b8d7dd56"  # Expected combined hash for validation
 
-# Espresso modes to test - cycling through different algorithms
-# Each file gets tested with 2-3 different modes to ensure comprehensive coverage
+# Espresso modes to test - cycling through different modes
+# Each file gets tested with 2-3 different modes
 # Modes cover: default, fast, strong, output phase optimization, single output, etc.
 ESPRESSO_MODES=(
     ""                    # 0: Default mode (ESPRESSO algorithm)
@@ -114,7 +114,7 @@ print_header() {
     echo -e "${BLUE}Using binary: ${NC}$ESPRESSO_BIN"
     echo -e "${BLUE}Hash algorithm: ${NC}$HASH_ALGO"
     echo -e "${BLUE}Timeout per test: ${NC}${TIMEOUT_SECONDS}s"
-    echo -e "${BLUE}Testing strategy: ${NC}Multiple modes per file for comprehensive coverage"
+    echo -e "${BLUE}Testing strategy: ${NC}Multiple modes per file"
     echo ""
 }
 
@@ -169,7 +169,7 @@ get_modes_for_file() {
     local mode2=${ESPRESSO_MODES[$(((file_index + 1) % mode_count))]}
     local modes_to_use="$mode1 $mode2"
     
-    # For every 3rd file, add a third mode for extra coverage
+    # For every 3rd file, add a third mode
     if [ $((file_index % 3)) -eq 0 ]; then
         local mode3=${ESPRESSO_MODES[$(((file_index + 2) % mode_count))]}
         modes_to_use="$mode1 $mode2 $mode3"
@@ -348,7 +348,7 @@ print_final_status() {
     if [ $failed -eq 0 ] && [ $timed_out -eq 0 ]; then
         echo -e "${GREEN}✓ All tests passed successfully!${NC}"
         echo -e "${GREEN}  Hash matches expected value: $EXPECTED_HASH${NC}"
-        echo -e "${GREEN}  Tested with multiple Espresso modes for comprehensive coverage${NC}"
+        echo -e "${GREEN}  Output is identical to the original implementation${NC}"
         exit 0
     else
         echo -e "${RED}✗ Some tests failed or timed out!${NC}"

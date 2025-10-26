@@ -93,37 +93,42 @@ The output is a minimized PLA representation in standard format. For complete co
 ### Command-Line Options
 
 **Main Algorithm Modes (-D):**
-- `-Dexact` - Exact minimization algorithm (guarantees minimum number of product terms, heuristically minimizes literals)
-- `-Dmany` - Read and minimize multiple PLAs from one file (separated by `.e`)
-- `-Dsimplify` - Simplify the cover without full Espresso minimization
-- `-Dso` - Minimize each function as single-output (no term sharing between outputs)
-- `-Dso_both` - Minimize each function as single-output, choosing function or complement based on fewer terms
-- `-Dopo` - Perform output phase optimization (determine which functions to complement to reduce terms)
-- `-Dopoall` - Try all possible phase assignments (exponential cost)
+- `-Dexact` - Exact minimization algorithm (guarantees minimum number of product terms, and heuristically minimizes number of literals). Potentially expensive.
+- `-Dmany` - Reads and minimizes PLA's until end-of-file is detected. PLA's in the same file are separated by `.e`
+- `-Dsimplify` - Quick simplification of the cover (complementation followed by single containment)
+- `-Dso` - Minimize each function one at a time as a single-output function. Terms will not be shared among the functions
+- `-Dso_both` - Minimize each function one at a time as a single-output function, but choose the function or its complement based on which has fewer terms
+- `-Dopo` - Perform output phase optimization (i.e., determine which functions to complement to reduce the number of terms needed to implement the function)
+- `-Dopoall` - Minimize the function with all possible phase assignments (exponential number of minimizations)
+
+**Verification and Analysis (-D):**
+- `-Dcheck` - Checks that the function is a partition of the entire space (i.e., that the ON-set, OFF-set and DC-set are pairwise disjoint, and that their union is the Universe)
+- `-Dstats` - Provide simple statistics on the size of the function
+- `-Dverify` - Checks for Boolean equivalence of two PLA's. Reads two filenames from the command line, each containing a single PLA
 
 **Espresso Options (-e):**
-- `-efast` - Stop after first EXPAND and IRREDUNDANT (single_expand mode, no iteration)
-- `-estrong` - Use SUPER_GASP instead of LAST_GASP (more expensive, occasionally better results)
-- `-eeat` - Discard comments from input file (normally comments are echoed to output)
-- `-enirr` - Result will not necessarily be made irredundant in final literal removal step
-- `-eness` - Do not detect essential primes
-- `-epos` - Swap ON-set and OFF-set after reading (minimizes the OFF-set)
-- `-eonset` - Recompute ON-set before minimization (useful for large truth tables)
-- `-enunwrap` - Do not unwrap the ON-set before minimization
+- `-efast` - Stop after the first EXPAND and IRREDUNDANT operations (i.e., do not iterate over the solution)
+- `-estrong` - Uses the alternate strategy SUPER_GASP (as a replacement for LAST_GASP) which is more expensive, but occasionally provides better results
+- `-eeat` - Normally comments are echoed from the input file to the output file. This option discards any comments in the input file
+- `-enirr` - The result will not necessarily be made irredundant in the final step which removes redundant literals
+- `-eness` - Essential primes will not be detected
+- `-epos` - Swaps the ON-set and OFF-set of the function after reading the function. This can be used to minimize the OFF-set of a function
+- `-eonset` - Recompute the ON-set before the minimization. Useful when the PLA has a large number of product terms (e.g., an exhaustive list of minterms)
+- `-enunwrap` - The ON-set will not be unwrapped before beginning the minimization
 
 **Output Options (-o):**
-- `-of`, `-ofd`, `-ofr`, `-ofdr` - Output ON-set (f), DC-set (d), and/or OFF-set (r) in various combinations
+- `-of`, `-ofd`, `-ofr`, `-ofdr` - Select any combination of the ON-set (f), the OFF-set (r), or the DC-set (d)
 - `-oeqntott` - Output algebraic equations
-- `-opleasure` - Output unmerged PLA format
+- `-opleasure` - Output an unmerged PLA format
 
 **Other Options:**
-- `-s` - Print execution summary with timing and statistics
-- `-t` - Print execution trace showing progress of each algorithm step
-- `-x` - Suppress printing of solution (useful with `-s` for timing analysis)
-- `-d` - Enable debugging (turns on trace, summary, and debug output)
-- `-v[type]` - Verbose debugging (for specific algorithm components)
-- `-Sn` - Select strategy number for certain subcommands
-- `-rn-m` - Select range (for outputs or variables in certain operations)
+- `-s` - Print a short summary of the execution including initial cost, final cost, and computer resources used
+- `-t` - Produce a trace showing the execution of the program. After each main step, a line is printed reporting processor time used and current cost
+- `-x` - Suppress printing of the solution
+- `-d` - Enable debugging (useful only for those familiar with the algorithms used)
+- `-v[type]` - Verbose debugging detail (not generally useful)
+- `-Sn` - Select strategy for subcommands (opo, opoall, pair, pairall, so, so_both)
+- `-rn-m` - Select range for subcommands (first and last outputs or variables)
 
 ### Example Files
 
@@ -171,12 +176,7 @@ Final combined hash (sha256):
   Hash matches expected value
 ```
 
-### What the Tests Verify
-
-- All algorithm modes produce consistent, correct output
-- No regressions in functionality across different minimization strategies
-- Cross-platform compatibility (verified on Linux, macOS)
-- Performance characteristics remain within acceptable bounds
+The test suite verifies that the modernized code produces **identical output** to the original implementation, ensuring that all ANSI C conversions and code modernizations preserve the exact functionality of the original Espresso algorithm.
 
 ## Documentation
 
