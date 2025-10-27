@@ -20,6 +20,8 @@ This modernized version addresses several improvements while maintaining 100% fu
 
 ### Code Modernization
 
+- **Cross-Platform Support**: Builds cleanly on Linux, macOS, and Windows (MSVC)
+
 - **ANSI C Compliance**: Converted all Kernighan & Ritchie (K&R) C function declarations to ANSI C standard
   - Original: 2,173 compiler warnings on modern compilers (AppleClang 17.0.0)
   - Modernized: 0 warnings with strict compilation flags
@@ -40,23 +42,34 @@ All changes have been rigorously verified to ensure zero functional changes:
 ### Prerequisites
 
 - CMake 3.10 or higher
-- C compiler (GCC, Clang, or compatible)
-- Make or Ninja build system
+- C compiler (GCC, Clang, MSVC, or compatible)
+- Make or Ninja build system (Windows: Visual Studio or MSBuild)
 
 ### Build Instructions
 
+**Unix/Linux/macOS:**
+
 ```bash
-# Create build directory
-mkdir build
-cd build
+# Configure and build
+cmake -B build
+cmake --build build
 
-# Configure with CMake
-cmake ..
+# Optional: Install system-wide (requires permissions)
+sudo cmake --install build
 
-# Build (using parallel jobs for faster compilation)
-make -j8
+# The espresso binary will be in build/espresso
+```
 
-# The espresso binary will be in the build directory
+**Windows (Visual Studio):**
+
+```bash
+# Configure with Visual Studio generator
+cmake -G "Visual Studio 17 2022" -A x64 -B build
+
+# Build
+cmake --build build --config Release
+
+# The espresso.exe will be in build\Release\
 ```
 
 ## Usage
