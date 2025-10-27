@@ -32,7 +32,9 @@ pcover signature(pcover F1, pcover D1, pcover R1)
     R = unravel(R, cube.num_binary_vars);
     R = sf_contain(R);
 
+#ifndef _WIN32
     signal(SIGXCPU, cleanup);
+#endif
     start_time = ptime();
 
     /* Initial expand and irredundant */

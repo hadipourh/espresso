@@ -275,8 +275,8 @@ start:
         T[1] = (pcube)Tsave;
 
         if (debug & TAUT) {
-            printf("UNATE_REDUCTION: %d unate variables, reduced to %ld\n",
-                   cdata.vars_unate, CUBELISTSIZE(T));
+            printf("UNATE_REDUCTION: %d unate variables, reduced to %d\n",
+                   cdata.vars_unate, (int)CUBELISTSIZE(T));
         }
         goto start;
 
@@ -389,8 +389,8 @@ start:
         T[1] = (pcube)Tsave;
 
         if (debug & TAUT) {
-            printf("UNATE_REDUCTION: %d unate variables, reduced to %ld\n",
-                   cdata.vars_unate, CUBELISTSIZE(T));
+            printf("UNATE_REDUCTION: %d unate variables, reduced to %d\n",
+                   cdata.vars_unate, (int)CUBELISTSIZE(T));
         }
         goto start;
     }
