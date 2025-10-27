@@ -23,7 +23,10 @@
  *   ..!ucbvax!eros!octtools
  */
 
-__attribute__((unused)) static char octtools_copyright[] =
+#ifdef __GNUC__
+__attribute__((unused))
+#endif
+static char octtools_copyright[] =
     "Copyright (c) 1988, 1989, Regents of the University of California.  All "
     "rights reserved.";
 #endif

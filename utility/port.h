@@ -44,7 +44,9 @@ typedef int int16;
 
 #include <stdio.h>
 #include <ctype.h>
+#ifndef _WIN32
 #include <sys/types.h>
+#endif
 #undef HUGE
 #include <math.h>
 #include <signal.h>
@@ -106,7 +108,7 @@ typedef int int16;
 #endif /* __STDC__ */
 
 /* Some machines fail to define some functions in stdio.h */
-#ifndef __STDC__
+#if !defined(__STDC__) && !defined(_WIN32) && !defined(_MSC_VER)
 extern FILE *popen(), *tmpfile();
 extern int pclose();
 #ifndef clearerr /* is a macro on many machines, but not all */
@@ -118,7 +120,7 @@ extern VOID_HACK rewind();
 #endif /* __STDC__ */
 
 /* most machines don't give us a header file for these */
-#ifdef __STDC__
+#if defined(__STDC__) || defined(_WIN32) || defined(_MSC_VER)
 #include <stdlib.h>
 #else
 #ifdef hpux
@@ -139,7 +141,7 @@ extern int sscanf();
 #endif /* __STDC__ */
 
 /* some call it strings.h, some call it string.h; others, also have memory.h */
-#ifdef __STDC__
+#if defined(__STDC__) || defined(_WIN32) || defined(_MSC_VER)
 #include <string.h>
 #else
 /* ANSI C string.h -- 1/11/88 Draft Standard */
