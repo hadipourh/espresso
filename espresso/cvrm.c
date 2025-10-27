@@ -109,7 +109,7 @@ pcover size_sort(pcover T)
 }
 
 /*  mini_sort -- sort cubes according to the heuristics of mini */
-pcover mini_sort(pcover F, int (*compare)())
+pcover mini_sort(pcover F, int (*compare)(const void *, const void *))
 {
     register int *count, cnt, n = cube.size, i;
     register pcube p, last;

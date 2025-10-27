@@ -277,7 +277,7 @@ int rm2_contain(pset *A1, pset *B1)
 }
 
 /* sf_sort -- sort the sets of A */
-pset *sf_sort(pset_family A, int (*compare)())
+pset *sf_sort(pset_family A, int (*compare)(const void *, const void *))
 {
     register pset p, last, *pdest, *A1;
 
