@@ -99,7 +99,9 @@ typedef int int16;
 
 #define SIZET size_t
 
-#ifdef __STDC__
+#if defined(_WIN32) || defined(_MSC_VER)
+/* Windows SDK already defines CONST and VOIDSTAR */
+#elif defined(__STDC__)
 #define CONST    const
 #define VOIDSTAR void *
 #else
