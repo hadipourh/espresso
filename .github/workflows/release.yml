@@ -59,4 +59,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
           draft: false
-
+  build-windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build for x86_64-windows
+        run: |
+          cmake -G "Visual Studio 17 2022" -A x64 -B build
+          cmake --build build --config Release
+          move build\Release\espresso.exe x86_64-windows-espresso.exe
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "*espresso.exe"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          draft: false
