@@ -35,6 +35,9 @@
 #define BSD
 #endif
 
+#ifdef _WIN32
+#include <windows.h>
+#else
 #ifdef BSD
 #include <sys/time.h>
 #include <sys/resource.h>
@@ -51,6 +54,7 @@
 #ifdef UNIX100
 #include <sys/times.h>
 #endif
+#endif
 
 /*
  *   util_cpu_time -- return a long which represents the elapsed processor
@@ -59,6 +63,18 @@
 long util_cpu_time() {
     long t = 0;
 
+#ifdef _WIN32
+    FILETIME creation_time, exit_time, kernel_time, user_time;
+    ULARGE_INTEGER uli;
+    
+    if (GetProcessTimes(GetCurrentProcess(), &creation_time, &exit_time, 
+                        &kernel_time, &user_time)) {
+        uli.LowPart = user_time.dwLowDateTime;
+        uli.HighPart = user_time.dwHighDateTime;
+        /* Convert from 100-nanosecond intervals to milliseconds */
+        t = (long)(uli.QuadPart / 10000);
+    }
+#else
 #ifdef BSD
     struct rusage rusage;
     (void)getrusage(RUSAGE_SELF, &rusage);
@@ -87,6 +103,7 @@ long util_cpu_time() {
     struct tms buffer; /* times() with 100 Hz resolution */
     times(&buffer);
     t = buffer.tms_utime * 10;
+#endif
 #endif
 
     return t;

@@ -17,14 +17,22 @@
 #include <math.h>
 #include "espresso.h"
 #include "signature.h"
+
+#ifndef _WIN32
 #include <sys/time.h>
 #include <sys/resource.h>
+#endif
 
 void set_time_limit(int seconds)
 {
+#ifndef _WIN32
     struct rlimit rlp_st, *rlp = &rlp_st;
     rlp->rlim_cur = seconds;
     setrlimit(RLIMIT_CPU, rlp);
+#else
+    /* Time limit not supported on Windows - function is no-op */
+    (void)seconds; /* Suppress unused parameter warning */
+#endif
 }
 
 void print_cover(pcover F, char *name)
