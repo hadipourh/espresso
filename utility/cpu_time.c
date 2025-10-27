@@ -1,4 +1,7 @@
 /* LINTLIBRARY */
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include "copyright.h"
 #include "port.h"
 #include "utility.h"
@@ -35,9 +38,6 @@
 #define BSD
 #endif
 
-#ifdef _WIN32
-#include <windows.h>
-#else
 #ifdef BSD
 #include <sys/time.h>
 #include <sys/resource.h>
@@ -53,7 +53,6 @@
 
 #ifdef UNIX100
 #include <sys/times.h>
-#endif
 #endif
 
 /*

@@ -196,7 +196,7 @@ extern VOID_HACK sleep();
 #endif
 
 /* handle the various limits */
-#if defined(__STDC__) || defined(POSIX)
+#if defined(__STDC__) || defined(POSIX) || defined(_WIN32) || defined(_MSC_VER)
 #include <limits.h>
 #else
 #define USHRT_MAX (~(unsigned short int)0)
