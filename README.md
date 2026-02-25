@@ -46,7 +46,8 @@ All changes have been rigorously verified to ensure zero functional changes:
 - Make or Ninja build system (Windows: Visual Studio or MSBuild)
 
 **NixOS/nix:**
-When following the **Unix** build instructions (e.g. during development), use
+The build instuctions for **NixOS/nix** and **Unix/Linux/macOS** can be used without any prerequisites.
+However, to manually execute internal build instructions (e.g. during development), use
 ```bash
 nix develop
 ```
@@ -58,11 +59,10 @@ to open a `bash` with all required dependencies installed.
 
 ```bash
 # Configure and build
-cmake -B build
-cmake --build build
+make build
 
 # Optional: Install system-wide (requires permissions)
-sudo cmake --install build
+make install
 
 # The espresso binary will be in build/espresso
 ```
@@ -80,6 +80,7 @@ cmake --build build --config Release
 ```
 
 **NixOS/nix:**
+Alternatively, the build instructions for general Unix/Linux systems can be used.
 
 ```bash
 # Configure and build
@@ -186,13 +187,19 @@ The repository includes comprehensive example files in three categories:
 - `examples/hard_examples/` - Computationally intensive cases (19 files)
 - `examples/tlex/` - Additional test cases (41 files)
 
-## Testing
+## Testing and Formatting
 
 A comprehensive test script is provided to verify the correctness of the implementation:
 
 ```bash
 # Run all tests (183 example files with multiple modes)
-./test.sh
+make tests
+```
+
+The program code can be formatted to align with default coding guidelines:
+
+```bash
+make format
 ```
 
 ### Test Suite Features
