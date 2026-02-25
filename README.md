@@ -45,6 +45,13 @@ All changes have been rigorously verified to ensure zero functional changes:
 - C compiler (GCC, Clang, MSVC, or compatible)
 - Make or Ninja build system (Windows: Visual Studio or MSBuild)
 
+**NixOS/nix:**
+When following the **Unix** build instructions (e.g. during development), use
+```bash
+nix develop
+```
+to open a `bash` with all required dependencies installed.
+
 ### Build Instructions
 
 **Unix/Linux/macOS:**
@@ -70,6 +77,34 @@ cmake -G "Visual Studio 17 2022" -A x64 -B build
 cmake --build build --config Release
 
 # The espresso.exe will be in build\Release\
+```
+
+**NixOS/nix:**
+
+```bash
+# Configure and build
+nix build
+
+# The espresso binary will be in result/bin/espresso
+
+# Optional: open shell environment with espresso added to $PATH
+nix shell
+
+# Optional: build and execute espresso
+nix run --
+```
+
+Additionally, espresso can be used directly from github:
+
+```bash
+# Directly create a shell environment with espresso installed without downloading the git repository first
+nix shell github:hadipourh/espresso
+
+# Optional: specify commit hash for reproducibility by pinning the espresso version
+nix shell github:hadipourh/espresso/<commit-hash>
+
+# Directly execute espresso without downloading the git repository first
+nix run github:hadipourh/espresso --
 ```
 
 ## Usage
