@@ -46,12 +46,7 @@ All changes have been rigorously verified to ensure zero functional changes:
 - Make or Ninja build system (Windows: Visual Studio or MSBuild)
 
 **NixOS/nix:**
-The build instructions for **NixOS/nix** and **Unix/Linux/macOS** (gnumake only) can be used without any prerequisites.
-However, to manually execute internal build instructions (e.g. during development), use
-```bash
-nix develop
-```
-to open a `bash` with all required dependencies installed.
+No prerequisites
 
 ### Build Instructions
 

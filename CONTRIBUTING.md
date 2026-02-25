@@ -16,6 +16,13 @@ Thank you for your interest in contributing to the Espresso Logic Minimizer proj
 - C compiler (GCC or Clang)
 - Standard build tools (make)
 
+**NixOS/nix:**
+All required dependencies can be installed in a development shell using:
+```bash
+nix develop
+```
+to open a `bash` with all required dependencies installed.
+
 ### Building
 
 ```bash
@@ -30,7 +37,7 @@ make -j8
 ### Code Style
 
 - Follow ANSI C99 standard
-- Maintain the existing code style (4-space indentation, K&R brace placement for functions, etc.)
+g Maintain the existing code style (4-space indentation, K&R brace placement for functions, etc.)
 - This codebase originates from UC Berkeley (1980s) — please keep formatting consistent with the surrounding code rather than applying automatic formatters
 
 ### Testing
@@ -39,7 +46,7 @@ Before submitting changes, ensure all tests pass:
 
 ```bash
 # Run comprehensive test suite
-./test.sh
+make test
 ```
 
 All 183 examples must pass, and the final hash must match the expected value to ensure functional compatibility with the original implementation.
