@@ -6,3 +6,5 @@ cmake_install.cmake
 # clion
 .idea/
 cmake-build-debug/
+# test.sh
+test_results_*.txt
