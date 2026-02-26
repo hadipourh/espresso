@@ -40,8 +40,11 @@ int getopt(int argc, char *argv[], char *optstring)
     if (*++place == ':') {
         if (*scan != '\0') {
             optarg = scan, scan = NullS;
-        } else {
+        } else if (optind < argc) {
             optarg = argv[optind], optind++;
+        } else {
+            fprintf(stderr, "%s: option -%c requires an argument\n", argv[0], c);
+            return '?';
         }
     }
     return c;
