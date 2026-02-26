@@ -30,11 +30,8 @@ make -j8
 ### Code Style
 
 - Follow ANSI C99 standard
-- Use the provided code formatter before committing:
-  ```bash
-  ./format.sh
-  ```
-- Maintain existing code style (4-space indentation, etc.)
+- Maintain the existing code style (4-space indentation, K&R brace placement for functions, etc.)
+- This codebase originates from UC Berkeley (1980s) — please keep formatting consistent with the surrounding code rather than applying automatic formatters
 
 ### Testing
 
