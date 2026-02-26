@@ -16,6 +16,14 @@
 #include "espresso.h"
 #include "main.h" /* table definitions for options */
 
+#if defined(_WIN32) || defined(_MSC_VER)
+#include <io.h>
+#define isatty _isatty
+#define fileno _fileno
+#else
+extern int isatty(int);
+#endif
+
 static FILE *last_fp;
 static int input_type = FD_type;
 
@@ -550,6 +558,10 @@ void getPLA(int opt, int argc, char *argv[], int option, pPLA *PLA, int out_type
     char *fname;
 
     if (opt >= argc) {
+        if (isatty(fileno(stdin))) {
+            usage();
+            exit(1);
+        }
         fp = stdin;
         fname = "(stdin)";
     } else {
