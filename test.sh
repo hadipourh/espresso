@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Script to test all espresso examples with multiple modes
 # This verifies that the modernized code produces identical output to the original implementation

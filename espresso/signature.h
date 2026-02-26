@@ -21,7 +21,8 @@
 /* black_white.c */ void merge_list();
 /* black_white.c */ void print_bw(int size);
 /* black_white.c */ void variable_list_alloc(int size);
-/* black_white.c */ void variable_list_init(int reduced_c_free_count, int *reduced_c_free_list);
+/* black_white.c */ void variable_list_init(int reduced_c_free_count,
+                                            int *reduced_c_free_list);
 /* black_white.c */ void variable_list_delete(int element);
 /* black_white.c */ void variable_list_insert(int element);
 /* black_white.c */ bool variable_list_empty();
@@ -32,8 +33,10 @@
 /* black_white.c */ extern void pop_black_list();
 /* canonical.c */ int is_minterm();
 /* canonical.c */ pcover find_canonical_cover(pcover F1, pcover D, pcover R);
-/* essentiality.c */ pcover etr_order(pcover F, pcover E, pcover R, pcube c, pcube d);
-/* essentiality.c */ void aux_etr_order(pcover F, pcover E, pcover R, pcube c, pcube d);
+/* essentiality.c */ pcover etr_order(pcover F, pcover E, pcover R, pcube c,
+                                      pcube d);
+/* essentiality.c */ void aux_etr_order(pcover F, pcover E, pcover R, pcube c,
+                                        pcube d);
 /* essentiality.c */ pcover get_mins(pcube c);
 /* essentiality.c */ int ascending(const void *p1, const void *p2);
 /* util_signature.c */ void set_time_limit(int seconds);
@@ -47,5 +50,7 @@
 /* signature.c */ void cleanup(int sig);
 /* signature.c */ pcover signature(pcover F1, pcover D1, pcover R1);
 /* signature.c */ pcover generate_primes(pcover F, pcover R);
-/* signature_exact.c */ pcover signature_minimize_exact(pcover ESCubes, pcover ESSet);
-/* signature_exact.c */ sm_matrix *signature_form_table(pcover ESCubes, pcover ESSet);
+/* signature_exact.c */ pcover signature_minimize_exact(pcover ESCubes,
+                                                        pcover ESSet);
+/* signature_exact.c */ sm_matrix *signature_form_table(pcover ESCubes,
+                                                        pcover ESSet);

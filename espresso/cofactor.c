@@ -28,8 +28,7 @@
 */
 
 /* cofactor -- compute the cofactor of a cover with respect to a cube */
-pcube *cofactor(pcube *T, pcube c)
-{
+pcube *cofactor(pcube *T, pcube c) {
     pcube temp = cube.temp[0], *Tc_save, *Tc, *T1;
     register pcube p;
     int listlen;
@@ -80,7 +79,7 @@ pcube *cofactor(pcube *T, pcube c)
 #endif
 
             *Tc++ = p;
-            false:;
+            false :;
         }
     }
 
@@ -96,8 +95,7 @@ pcube *cofactor(pcube *T, pcube c)
     This routine has been optimized for speed.
 */
 
-pcube *scofactor(pcube *T, pcube c, int var)
-{
+pcube *scofactor(pcube *T, pcube c, int var) {
     pcube *Tc, *Tc_save;
     register pcube p, mask = cube.temp[1], *T1;
     register int first = cube.first_word[var], last = cube.last_word[var];
@@ -132,8 +130,7 @@ pcube *scofactor(pcube *T, pcube c, int var)
     return Tc_save;
 }
 
-void massive_count(pcube *T)
-{
+void massive_count(pcube *T) {
     int *count = cdata.part_zeros;
     pcube *T1;
 
@@ -294,8 +291,7 @@ void massive_count(pcube *T)
     }
 }
 
-int binate_split_select(pcube *T, pcube cleft, pcube cright, int debug_flag)
-{
+int binate_split_select(pcube *T, pcube cleft, pcube cright, int debug_flag) {
     int best = cdata.best;
     register int i, lastbit = cube.last_part[best], halfbit = 0;
     register pcube cof = T[0];
@@ -321,8 +317,7 @@ int binate_split_select(pcube *T, pcube cleft, pcube cright, int debug_flag)
     return best;
 }
 
-pcube *cube1list(pcover A)
-{
+pcube *cube1list(pcover A) {
     register pcube last, p, *plist, *list;
 
     list = plist = ALLOC(pcube, A->count + 3);
@@ -336,8 +331,7 @@ pcube *cube1list(pcover A)
     return list;
 }
 
-pcube *cube2list(pcover A, pcover B)
-{
+pcube *cube2list(pcover A, pcover B) {
     register pcube last, p, *plist, *list;
 
     list = plist = ALLOC(pcube, A->count + B->count + 3);
@@ -354,8 +348,7 @@ pcube *cube2list(pcover A, pcover B)
     return list;
 }
 
-pcube *cube3list(pcover A, pcover B, pcover C)
-{
+pcube *cube3list(pcover A, pcover B, pcover C) {
     register pcube last, p, *plist, *list;
 
     plist = ALLOC(pcube, A->count + B->count + C->count + 3);
@@ -376,8 +369,7 @@ pcube *cube3list(pcover A, pcover B, pcover C)
     return list;
 }
 
-pcover cubeunlist(pcube *A1)
-{
+pcover cubeunlist(pcube *A1) {
     register int i;
     register pcube p, pdest, cof = A1[0];
     register pcover A;
@@ -391,8 +383,7 @@ pcover cubeunlist(pcube *A1)
     return A;
 }
 
-void simplify_cubelist(pcube *T)
-{
+void simplify_cubelist(pcube *T) {
     register pcube *Tdest;
     register int i, ncubes;
 

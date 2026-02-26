@@ -26,4 +26,3 @@ jobs:
         run: cmake -B build && make -C build
       - name: Test
         run: cd build && ctest
-

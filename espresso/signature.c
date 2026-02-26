@@ -17,8 +17,7 @@
 
 static long start_time; /* yuk */
 
-pcover signature(pcover F1, pcover D1, pcover R1)
-{
+pcover signature(pcover F1, pcover D1, pcover R1) {
     pcover ESC, ESSet, ESSENTIAL;
     pcover F, D, R;
     pcube last, p;
@@ -76,8 +75,7 @@ pcover signature(pcover F1, pcover D1, pcover R1)
     return F;
 }
 
-pcover generate_primes(pcover F, pcover R)
-{
+pcover generate_primes(pcover F, pcover R) {
     pcube c, r, lastc, b, lastb;
     pcover BB, PRIMES;
     pcube odd, even, out_part_r;

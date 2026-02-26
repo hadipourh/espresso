@@ -52,8 +52,7 @@ static int opo_repeated;
 static int opo_exact;
 static void minimize(pPLA PLA);
 
-void phase_assignment(pPLA PLA, int opo_strategy)
-{
+void phase_assignment(pPLA PLA, int opo_strategy) {
     opo_no_make_sparse = opo_strategy % 2;
     skip_make_sparse = opo_no_make_sparse;
     opo_repeated = (opo_strategy / 2) % 2;
@@ -82,8 +81,7 @@ void phase_assignment(pPLA PLA, int opo_strategy)
  *  to a single phase assignment a step at a time.  Performs m + 1
  *  minimizations !
  */
-void repeated_phase_assignment(pPLA PLA)
-{
+void repeated_phase_assignment(pPLA PLA) {
     int i;
     pcube phase;
 
@@ -109,8 +107,7 @@ void repeated_phase_assignment(pPLA PLA)
  *  find_phase -- find a phase assignment for the PLA for all outputs starting
  *  with output number first_output.
  */
-pcube find_phase(pPLA PLA, int first_output, pcube phase1)
-{
+pcube find_phase(pPLA PLA, int first_output, pcube phase1) {
     pcube phase;
     pPLA PLA1;
 
@@ -150,8 +147,7 @@ pcube find_phase(pPLA PLA, int first_output, pcube phase1)
  */
 
 /*ARGSUSED*/
-pcover opo(pcube phase, pcover T, pcover D, pcover R, int first_output)
-{
+pcover opo(pcube phase, pcover T, pcover D, pcover R, int first_output) {
     int offset, output, i, last_output, ind;
     pset pdest, select, p, p1, last, last1, not_covered, tmp;
     pset_family temp, T1, T2;
@@ -214,8 +210,8 @@ pcover opo(pcube phase, pcover T, pcover D, pcover R, int first_output)
     return T1;
 }
 
-pset_family opo_recur(pcover T, pcover D, pcube select, int offset, int first, int last)
-{
+pset_family opo_recur(pcover T, pcover D, pcube select, int offset, int first,
+                      int last) {
     static int level = 0;
     int middle;
     pset_family sl, sr, temp;
@@ -248,8 +244,7 @@ pset_family opo_recur(pcover T, pcover D, pcube select, int offset, int first, i
     return temp;
 }
 
-pset_family opo_leaf(register pcover T, pset select, int out1, int out2)
-{
+pset_family opo_leaf(register pcover T, pset select, int out1, int out2) {
     register pset_family temp;
     register pset p, pdest;
     register int i;
@@ -384,8 +379,7 @@ int n;
  *  duplicated in the output part
  */
 
-void output_phase_setup(INOUT pPLA PLA, IN int first_output)
-{
+void output_phase_setup(INOUT pPLA PLA, IN int first_output) {
     pcover F, R, D;
     pcube mask, mask1, last;
     int first_part, offset;
@@ -474,8 +468,7 @@ void output_phase_setup(INOUT pPLA PLA, IN int first_output)
  *  set_phase -- given a "cube" which describes which phases of the output
  *  are to be implemented, compute the appropriate on-set and off-set
  */
-pPLA set_phase(INOUT pPLA PLA)
-{
+pPLA set_phase(INOUT pPLA PLA) {
     pcover F1, R1;
     register pcube last, p, outmask;
     register pcube temp = cube.temp[0], phase = PLA->phase,
@@ -508,8 +501,7 @@ pPLA set_phase(INOUT pPLA PLA)
 
 #define POW2(x) (1 << (x))
 
-void opoall(pPLA PLA, int first_output, int last_output, int opo_strategy)
-{
+void opoall(pPLA PLA, int first_output, int last_output, int opo_strategy) {
     pcover F, D, R, best_F, best_D, best_R;
     int i, j, ind, num;
     pcube bestphase;
@@ -582,8 +574,7 @@ void opoall(pPLA PLA, int first_output, int last_output, int opo_strategy)
     PLA->R = best_R;
 }
 
-static void minimize(pPLA PLA)
-{
+static void minimize(pPLA PLA) {
     if (opo_exact) {
         EXEC_S(PLA->F = minimize_exact(PLA->F, PLA->D, PLA->R, 1), "EXACT",
                PLA->F);

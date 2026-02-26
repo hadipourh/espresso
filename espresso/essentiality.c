@@ -72,8 +72,7 @@ pcover COVER; /* A global bag to collect the signature cubes in the cover
  *		2. Freer Unate
  *		3. Freer Binate
  */
-pcover etr_order(pcover F, pcover E, pcover R, pcube c, pcube d)
-{
+pcover etr_order(pcover F, pcover E, pcover R, pcube c, pcube d) {
     static int num_binary_vars;
     int v, e0, e1;
     int i, free_var;
@@ -194,8 +193,7 @@ pcover etr_order(pcover F, pcover E, pcover R, pcube c, pcube d)
     return COVER;
 }
 
-int ascending(const void *p1, const void *p2)
-{
+int ascending(const void *p1, const void *p2) {
     int f1 = ((VAR *)p1)->free_count;
     int f2 = ((VAR *)p2)->free_count;
 
@@ -218,8 +216,7 @@ int ascending(const void *p1, const void *p2)
  *	E: Extended don't care set. DC + identified ESC;
  *	R: OFFSET cover;
  */
-void aux_etr_order(pcover F, pcover E, pcover R, pcube c, pcube d)
-{
+void aux_etr_order(pcover F, pcover E, pcover R, pcube c, pcube d) {
     pcover minterms;
     pcube d_minterm;
     pcube sigma_d;
@@ -292,8 +289,7 @@ void aux_etr_order(pcover F, pcover E, pcover R, pcube c, pcube d)
     variable_head--;
 }
 
-pcover get_mins(pcube c)
-{
+pcover get_mins(pcube c) {
     pcover minterms;
     pcube d_minterm;
     int i, j;
@@ -315,8 +311,7 @@ pcover get_mins(pcube c)
     return minterms;
 }
 
-void print_list(int n, int *x, char *name)
-{
+void print_list(int n, int *x, char *name) {
     int i;
     printf("%s:\n", name);
     for (i = 0; i < n; i++) {

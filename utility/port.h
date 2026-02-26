@@ -94,7 +94,7 @@ typedef int int16;
 #ifndef CHARBITS
 #define UNSCHAR(c) ((unsigned char)(c))
 #else
-#define UNSCHAR(c) ((c)&CHARBITS)
+#define UNSCHAR(c) ((c) & CHARBITS)
 #endif
 
 #define SIZET size_t
@@ -163,7 +163,9 @@ extern int memcmp(), strcmp();
  * Modern systems (Linux, macOS, BSD, ANSI C) provide proper srandom(unsigned)
  * prototype in stdlib.h. Only declare the old K&R style for very old systems.
  */
-#if !defined(__STDC__) && !defined(__APPLE__) && !defined(__MACH__) && !defined(__linux__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__NetBSD__)
+#if !defined(__STDC__) && !defined(__APPLE__) && !defined(__MACH__) &&       \
+    !defined(__linux__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && \
+    !defined(__NetBSD__)
 extern VOID_HACK srandom();
 #endif
 extern long random();
@@ -192,7 +194,9 @@ extern VOID_HACK sleep();
     }
 #else
 #define assert(ex) \
-    { ; }
+    {              \
+        ;          \
+    }
 #endif
 #endif
 #endif

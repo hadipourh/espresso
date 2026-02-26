@@ -23,8 +23,7 @@
 #include <sys/resource.h>
 #endif
 
-void set_time_limit(int seconds)
-{
+void set_time_limit(int seconds) {
 #ifndef _WIN32
     struct rlimit rlp_st, *rlp = &rlp_st;
     rlp->rlim_cur = seconds;
@@ -35,8 +34,7 @@ void set_time_limit(int seconds)
 #endif
 }
 
-void print_cover(pcover F, char *name)
-{
+void print_cover(pcover F, char *name) {
     pcube last, p;
     printf("%s:\t %d\n", name, F->count);
     foreach_set(F, last, p) {
@@ -46,8 +44,7 @@ void print_cover(pcover F, char *name)
 }
 
 /* sf_equal: Check equality of two set families */
-int sf_equal(pcover F1, pcover F2)
-{
+int sf_equal(pcover F1, pcover F2) {
     int i;
     int count = F1->count;
     pcube *list1, *list2;
@@ -71,8 +68,7 @@ int sf_equal(pcover F1, pcover F2)
 /* time_usage:
  * 	Initialized on first call. Prints current time usage.
  */
-int time_usage(char *name)
-{
+int time_usage(char *name) {
     static int time_init;
     int time_current;
     static int flag = 1;
@@ -91,15 +87,13 @@ int time_usage(char *name)
 }
 
 /* s_totals : add time spent in the function and update call count */
-void s_totals(long time, int i)
-{
+void s_totals(long time, int i) {
     time = ptime() - time;
     total_time[i] += time;
     total_calls[i]++;
 }
 
-void s_runtime(long total)
-{
+void s_runtime(long total) {
     int i;
     long temp;
 

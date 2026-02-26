@@ -43,8 +43,7 @@ static bool toggle = TRUE;
     as fast as possible.
 */
 
-pcover reduce(INOUT pcover F, IN pcover D)
-{
+pcover reduce(INOUT pcover F, IN pcover D) {
     register pcube last, p, cunder, *FD;
 
     /* Order the cubes */
@@ -83,8 +82,7 @@ pcover reduce(INOUT pcover F, IN pcover D)
 }
 
 /* reduce_cube -- find the maximal reduction of a cube */
-pcube reduce_cube(IN pcube *FD, IN pcube p)
-{
+pcube reduce_cube(IN pcube *FD, IN pcube p) {
     pcube cunder;
 
     cunder = sccc(cofactor(FD, p));
@@ -117,8 +115,10 @@ pcube sccc(INOUT pcube *T) /* T will be disposed of */
     return r;
 }
 
-pcube sccc_merge(INOUT register pcube left, INOUT register pcube right, INOUT register pcube cl, INOUT register pcube cr) /* will be disposed of ... */
-                   /* will be disposed of ... */
+pcube sccc_merge(INOUT register pcube left, INOUT register pcube right,
+                 INOUT register pcube cl,
+                 INOUT register pcube cr) /* will be disposed of ... */
+                                          /* will be disposed of ... */
 {
     INLINEset_and(left, left, cl);
     INLINEset_and(right, right, cr);
@@ -142,8 +142,7 @@ pcube sccc_merge(INOUT register pcube left, INOUT register pcube right, INOUT re
 
     This is "anded" with the incoming cube result.
 */
-pcube sccc_cube(register pcube result, register pcube p)
-{
+pcube sccc_cube(register pcube result, register pcube p) {
     register pcube temp = cube.temp[0], mask;
     int var;
 
@@ -159,8 +158,10 @@ pcube sccc_cube(register pcube result, register pcube p)
  *   sccc_special_cases -- check the special cases for sccc
  */
 
-bool sccc_special_cases(INOUT pcube *T, OUT pcube *result) /* will be disposed if answer is determined */
-             /* returned only if answer determined */
+bool sccc_special_cases(
+    INOUT pcube *T,
+    OUT pcube *result) /* will be disposed if answer is determined */
+                       /* returned only if answer determined */
 {
     register pcube *T1, p, temp = cube.temp[1], ceil, cof = T[0];
     pcube *A, *B;

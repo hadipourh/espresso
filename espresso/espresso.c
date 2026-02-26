@@ -38,8 +38,7 @@
 
 #include "espresso.h"
 
-pcover espresso(pcover F, pcover D1, pcover R)
-{
+pcover espresso(pcover F, pcover D1, pcover R) {
     pcover E, D, Fsave;
     pset last, p;
     cost_t cost, best_cost;

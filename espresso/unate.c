@@ -8,8 +8,7 @@ static pset_family abs_covered(pset_family A, register int pick);
 static pset_family abs_covered_many(pset_family A, register pset pick_set);
 static int abs_select_restricted(pset_family A, pset restrict_set);
 
-pcover map_cover_to_unate(pcube *T)
-{
+pcover map_cover_to_unate(pcube *T) {
     register unsigned int word_test, word_set, bit_test, bit_set;
     register pcube p, pA;
     pset_family A;
@@ -48,8 +47,7 @@ pcover map_cover_to_unate(pcube *T)
     return A;
 }
 
-pcover map_unate_to_cover(pset_family A)
-{
+pcover map_unate_to_cover(pset_family A) {
     register int i, ncol, lp;
     register pcube p, pB;
     int var, nunate, *unate;
@@ -99,8 +97,7 @@ pcover map_unate_to_cover(pset_family A)
  *  unate_compl
  */
 
-pset_family unate_compl(pset_family A)
-{
+pset_family unate_compl(pset_family A) {
     register pset p, last;
 
     /* Make sure A is single-cube containment minimal */
@@ -205,8 +202,7 @@ pset_family unate_complement(pset_family A) /* disposes of A */
     return Abar;
 }
 
-pset_family exact_minimum_cover(IN pset_family T)
-{
+pset_family exact_minimum_cover(IN pset_family T) {
     register pset p, last, p1;
     register int i, n;
     int lev, lvl;
@@ -283,8 +279,7 @@ pset_family exact_minimum_cover(IN pset_family T)
 
 #define MAGIC 500 /* save 500 cubes before containment */
 
-pset_family unate_intersect(pset_family A, pset_family B, bool largest_only)
-{
+pset_family unate_intersect(pset_family A, pset_family B, bool largest_only) {
     register pset pi, pj, lasti, lastj, pt;
     pset_family T, Tsave;
     bool save;
@@ -343,8 +338,7 @@ pset_family unate_intersect(pset_family A, pset_family B, bool largest_only)
  *  abs_covered -- after selecting a new column for the selected set,
  *  create a new matrix which is only those rows which are still uncovered
  */
-static pset_family abs_covered(pset_family A, register int pick)
-{
+static pset_family abs_covered(pset_family A, register int pick) {
     register pset last, p, pdest;
     register pset_family Aprime;
 
@@ -362,8 +356,7 @@ static pset_family abs_covered(pset_family A, register int pick)
  *  abs_covered_many -- after selecting many columns for ther selected set,
  *  create a new matrix which is only those rows which are still uncovered
  */
-static pset_family abs_covered_many(pset_family A, register pset pick_set)
-{
+static pset_family abs_covered_many(pset_family A, register pset pick_set) {
     register pset last, p, pdest;
     register pset_family Aprime;
 
@@ -382,8 +375,7 @@ static pset_family abs_covered_many(pset_family A, register pset pick_set)
  *  also belongs to the set "restrict"; weight each column of a set as
  *  1 / (set_ord(p) - 1).
  */
-static int abs_select_restricted(pset_family A, pset restrict_set)
-{
+static int abs_select_restricted(pset_family A, pset restrict_set) {
     register int i, best_var, best_count, *count;
 
     /* Sum the elements in these columns */

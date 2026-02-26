@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 clang-format -i {utility,espresso}/*.{h,c}
 cmake-format -i CMakeLists.txt

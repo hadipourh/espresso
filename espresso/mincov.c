@@ -8,7 +8,8 @@
 #define USE_INDEP_SET
 
 static int select_column(sm_matrix *A, int *weight, solution_t *indep);
-static void select_essential(sm_matrix *A, solution_t *select, int *weight, int bound);
+static void select_essential(sm_matrix *A, solution_t *select, int *weight,
+                             int bound);
 static int verify_cover(sm_matrix *A, sm_row *cover);
 
 #define fail(why)                                                              \
@@ -19,8 +20,8 @@ static int verify_cover(sm_matrix *A, sm_row *cover);
         abort();                                                               \
     }
 
-sm_row *sm_minimum_cover(sm_matrix *A, int *weight, int heuristic, int debug_level)
-{
+sm_row *sm_minimum_cover(sm_matrix *A, int *weight, int heuristic,
+                         int debug_level) {
     stats_t stats;
     solution_t *best, *select;
     sm_row *prow, *sol;
@@ -99,8 +100,8 @@ sm_row *sm_minimum_cover(sm_matrix *A, int *weight, int heuristic, int debug_lev
  *      and can be returned without further work.
  */
 
-solution_t *sm_mincov(sm_matrix *A, solution_t *select, int *weight, int lb, int bound, int depth, stats_t *stats)
-{
+solution_t *sm_mincov(sm_matrix *A, solution_t *select, int *weight, int lb,
+                      int bound, int depth, stats_t *stats) {
     sm_matrix *A1, *A2, *L, *R;
     sm_element *p;
     solution_t *select1, *select2, *best, *best1, *best2, *indep;
@@ -247,8 +248,7 @@ solution_t *sm_mincov(sm_matrix *A, solution_t *select, int *weight, int lb, int
     return best;
 }
 
-static int select_column(sm_matrix *A, int *weight, solution_t *indep)
-{
+static int select_column(sm_matrix *A, int *weight, solution_t *indep) {
     register sm_col *pcol;
     register sm_row *prow, *indep_cols;
     register sm_element *p, *p1;
@@ -300,7 +300,8 @@ static int select_column(sm_matrix *A, int *weight, solution_t *indep)
     return best_col;
 }
 
-static void select_essential(sm_matrix *A, solution_t *select, int *weight, int bound) /* must beat this solution */
+static void select_essential(sm_matrix *A, solution_t *select, int *weight,
+                             int bound) /* must beat this solution */
 {
     register sm_element *p;
     register sm_row *prow, *essen;
@@ -336,8 +337,7 @@ static void select_essential(sm_matrix *A, solution_t *select, int *weight, int 
     } while (delcols > 0 || delrows > 0 || essen_count > 0);
 }
 
-static int verify_cover(sm_matrix *A, sm_row *cover)
-{
+static int verify_cover(sm_matrix *A, sm_row *cover) {
     sm_row *prow;
 
     sm_foreach_row(A, prow) {

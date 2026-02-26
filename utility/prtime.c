@@ -10,8 +10,7 @@
  *  Hack for IBM/PC -- avoids using floating point
  */
 
-char *util_print_time(long t)
-{
+char *util_print_time(long t) {
     static char s[40];
 
     (void)sprintf(s, "%ld.%02ld sec", t / 1000, (t % 1000) / 10);

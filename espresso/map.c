@@ -3,8 +3,7 @@
 static pcube Gcube;
 static pset Gminterm;
 
-pset minterms(pcover T)
-{
+pset minterms(pcover T) {
     int size, var;
     register pcube last;
 
@@ -18,8 +17,7 @@ pset minterms(pcover T)
     return Gminterm;
 }
 
-void explode(int var, int z)
-{
+void explode(int var, int z) {
     int i, last = cube.last_part[var];
     for (i = cube.first_part[var], z *= cube.part_size[var]; i <= last;
          i++, z++)
@@ -57,8 +55,7 @@ static int mapindex[16][16] = {
 };
 
 #define POWER2(n) (1 << n)
-void map(pcover T)
-{
+void map(pcover T) {
     int j, k, l, other_input_offset, output_offset, outnum, ind;
     int largest_input_ind, numout;
     char c;

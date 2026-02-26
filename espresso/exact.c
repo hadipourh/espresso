@@ -1,7 +1,8 @@
 #include "espresso.h"
 
 static void dump_irredundant(pcover E, pcover Rt, pcover Rp, sm_matrix *table);
-static pcover do_minimize(pcover F, pcover D, pcover R, int exact_cover, int weighted);
+static pcover do_minimize(pcover F, pcover D, pcover R, int exact_cover,
+                          int weighted);
 
 /*
  *  minimize_exact -- main entry point for exact minimization
@@ -12,14 +13,16 @@ static pcover do_minimize(pcover F, pcover D, pcover R, int exact_cover, int wei
  *      skip_make_sparse
  */
 
-pcover minimize_exact(pcover F, pcover D, pcover R, int exact_cover)
-{ return do_minimize(F, D, R, exact_cover, /*weighted*/ 0); }
+pcover minimize_exact(pcover F, pcover D, pcover R, int exact_cover) {
+    return do_minimize(F, D, R, exact_cover, /*weighted*/ 0);
+}
 
-pcover minimize_exact_literals(pcover F, pcover D, pcover R, int exact_cover)
-{ return do_minimize(F, D, R, exact_cover, /*weighted*/ 1); }
+pcover minimize_exact_literals(pcover F, pcover D, pcover R, int exact_cover) {
+    return do_minimize(F, D, R, exact_cover, /*weighted*/ 1);
+}
 
-static pcover do_minimize(pcover F, pcover D, pcover R, int exact_cover, int weighted)
-{
+static pcover do_minimize(pcover F, pcover D, pcover R, int exact_cover,
+                          int weighted) {
     pcover newF, E, Rt, Rp;
     pset p, last;
     int heur, level, *weights;
@@ -92,8 +95,7 @@ static pcover do_minimize(pcover F, pcover D, pcover R, int exact_cover, int wei
     return newF;
 }
 
-static void dump_irredundant(pcover E, pcover Rt, pcover Rp, sm_matrix *table)
-{
+static void dump_irredundant(pcover E, pcover Rt, pcover Rp, sm_matrix *table) {
     FILE *fp_pi_table, *fp_primes;
     pPLA PLA;
     pset last, p;

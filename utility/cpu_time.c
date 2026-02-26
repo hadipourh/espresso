@@ -34,7 +34,8 @@
 #endif
 
 /* default */
-#if !defined(_WIN32) && !defined(BSD) && !defined(UNIX10) && !defined(UNIX60) && !defined(UNIX100)
+#if !defined(_WIN32) && !defined(BSD) && !defined(UNIX10) && \
+    !defined(UNIX60) && !defined(UNIX100)
 #define BSD
 #endif
 
@@ -65,8 +66,8 @@ long util_cpu_time() {
 #ifdef _WIN32
     FILETIME creation_time, exit_time, kernel_time, user_time;
     ULARGE_INTEGER uli;
-    
-    if (GetProcessTimes(GetCurrentProcess(), &creation_time, &exit_time, 
+
+    if (GetProcessTimes(GetCurrentProcess(), &creation_time, &exit_time,
                         &kernel_time, &user_time)) {
         uli.LowPart = user_time.dwLowDateTime;
         uli.HighPart = user_time.dwHighDateTime;

@@ -1,7 +1,6 @@
 #include "espresso.h"
 
-pset do_sm_minimum_cover(pset_family A)
-{
+pset do_sm_minimum_cover(pset_family A) {
     sm_matrix *M;
     sm_row *sparse_cover;
     sm_element *pe;

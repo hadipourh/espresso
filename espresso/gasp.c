@@ -28,8 +28,7 @@
  *  reduce are marked "NONPRIME"; those that reduced are marked "PRIME".
  *  The cubes are in the same order as in F.
  */
-static pcover reduce_gasp(pcover F, pcover D)
-{
+static pcover reduce_gasp(pcover F, pcover D) {
     pcube p, last, cunder, *FD;
     pcover G;
 
@@ -66,8 +65,8 @@ static pcover reduce_gasp(pcover F, pcover D)
  *  regardless of whether they become covered or not.
  */
 
-pcover expand_gasp(INOUT pcover F, IN pcover D, IN pcover R, IN pcover Foriginal)
-{
+pcover expand_gasp(INOUT pcover F, IN pcover D, IN pcover R,
+                   IN pcover Foriginal) {
     int c1index;
     pcover G;
 
@@ -86,10 +85,10 @@ pcover expand_gasp(INOUT pcover F, IN pcover D, IN pcover R, IN pcover Foriginal
  */
 void expand1_gasp(pcover F, pcover D, pcover R, pcover Foriginal, int c1index,
                   pcover *G) /* reduced cubes of ON-set */
-                      /* DC-set */
-                      /* OFF-set */
-                      /* ON-set before reduction (same order as F) */
- /* which index of F (or Freduced) to be checked */
+                             /* DC-set */
+                             /* OFF-set */
+                             /* ON-set before reduction (same order as F) */
+                             /* which index of F (or Freduced) to be checked */
 
 {
     register int c2index;
@@ -178,8 +177,7 @@ pcover irred_gasp(pcover F, pcover D, pcover G) /* G is disposed of */
 }
 
 /* last_gasp */
-pcover last_gasp(pcover F, pcover D, pcover R, cost_t *cost)
-{
+pcover last_gasp(pcover F, pcover D, pcover R, cost_t *cost) {
     pcover G, G1;
 
     EXECUTE(G = reduce_gasp(F, D), GREDUCE_TIME, G, *cost);
@@ -190,8 +188,7 @@ pcover last_gasp(pcover F, pcover D, pcover R, cost_t *cost)
 }
 
 /* super_gasp */
-pcover super_gasp(pcover F, pcover D, pcover R, cost_t *cost)
-{
+pcover super_gasp(pcover F, pcover D, pcover R, cost_t *cost) {
     pcover G, G1;
 
     EXECUTE(G = reduce_gasp(F, D), GREDUCE_TIME, G, *cost);

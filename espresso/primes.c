@@ -28,8 +28,9 @@ pcover primes_consensus(pcube *T) /* T will be disposed of */
     return Tnew;
 }
 
-static bool primes_consensus_special_cases(pcube *T, pcover *Tnew) /* will be disposed if answer is determined */
-          /* returned only if answer determined */
+static bool primes_consensus_special_cases(
+    pcube *T, pcover *Tnew) /* will be disposed if answer is determined */
+                            /* returned only if answer determined */
 {
     register pcube *T1, p, ceil, cof = T[0];
     pcube last;
@@ -101,8 +102,7 @@ static bool primes_consensus_special_cases(pcube *T, pcover *Tnew) /* will be di
     }
 }
 
-static pcover primes_consensus_merge(pcover Tl, pcover Tr, pcube cl, pcube cr)
-{
+static pcover primes_consensus_merge(pcover Tl, pcover Tr, pcube cl, pcube cr) {
     register pcube pl, pr, lastl, lastr, pt;
     pcover T, Tsave;
 
@@ -134,8 +134,7 @@ static pcover primes_consensus_merge(pcover Tl, pcover Tr, pcube cl, pcube cr)
     return Tsave;
 }
 
-static pcover and_with_cofactor(pset_family A, register pset cof)
-{
+static pcover and_with_cofactor(pset_family A, register pset cof) {
     register pset last, p;
 
     foreach_set(A, last, p) {

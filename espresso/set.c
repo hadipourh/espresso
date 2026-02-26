@@ -7,7 +7,8 @@
 #include "espresso.h"
 static pset_family set_family_garbage = NULL;
 
-static void intcpy(register unsigned int *d, register unsigned int *s, register long n) {
+static void intcpy(register unsigned int *d, register unsigned int *s,
+                   register long n) {
     register int i;
     for (i = 0; i < n; i++) {
         *d++ = *s++;
@@ -122,7 +123,8 @@ pset set_xor(register pset r, register pset a, register pset b) {
 }
 
 /* set_merge -- compute "a" & "mask" | "b" & ~ "mask" */
-pset set_merge(register pset r, register pset a, register pset b, register pset mask) {
+pset set_merge(register pset r, register pset a, register pset b,
+               register pset mask) {
     register int i = LOOP(a);
     PUTLOOP(r, i);
     do
@@ -215,7 +217,7 @@ pset sf_or(pset_family A) {
 
     or = set_new(A->sf_size);
     foreach_set(A, last, p) INLINEset_or(or, or, p);
-    return or ;
+    return or;
 }
 
 /* sf_and -- form the "and" of all sets in a set family */
@@ -318,8 +320,9 @@ pset_family sf_new(int num, int size) {
 }
 
 /* sf_save -- create a duplicate copy of a set family */
-pset_family sf_save(register pset_family A)
-{ return sf_copy(sf_new(A->count, A->sf_size), A); }
+pset_family sf_save(register pset_family A) {
+    return sf_copy(sf_new(A->count, A->sf_size), A);
+}
 
 /* sf_free -- free the storage allocated for a set family */
 void sf_free(pset_family A) {
@@ -352,8 +355,9 @@ pset_family sf_addset(pset_family A, pset s) {
 }
 
 /* sf_delset -- delete a set from a set family */
-void sf_delset(pset_family A, int i)
-{ (void)set_copy(GETSET(A, i), GETSET(A, --A->count)); }
+void sf_delset(pset_family A, int i) {
+    (void)set_copy(GETSET(A, i), GETSET(A, --A->count));
+}
 
 /* sf_print -- print a set_family as a set (list the element numbers) */
 void sf_print(pset_family A) {
@@ -553,8 +557,9 @@ int *sf_count_restricted(pset_family A, register pset r) {
 /*
  *  sf_delc -- delete columns first ... last of A
  */
-pset_family sf_delc(pset_family A, int first, int last)
-{ return sf_delcol(A, first, last - first + 1); }
+pset_family sf_delc(pset_family A, int first, int last) {
+    return sf_delcol(A, first, last - first + 1);
+}
 
 /*
  *  sf_addcol -- add columns to a set family; includes a quick check to see
@@ -608,7 +613,8 @@ pset_family sf_delcol(pset_family A, register int firstcol, register int n) {
 /*
  *  sf_copy_col -- copy column "srccol" from "src" to column "dstcol" of "dst"
  */
-pset_family sf_copy_col(pset_family dst, int dstcol, pset_family src, int srccol) {
+pset_family sf_copy_col(pset_family dst, int dstcol, pset_family src,
+                        int srccol) {
     register pset last, p, pdest;
     register int word_test, word_set;
     unsigned int bit_set, bit_test;
@@ -691,7 +697,8 @@ pset_family sf_transpose(pset_family A) {
  *   permute is an array of integers containing column numbers of A which
  *   are to be retained.
  */
-pset_family sf_permute(pset_family A, register int *permute, register int npermute) {
+pset_family sf_permute(pset_family A, register int *permute,
+                       register int npermute) {
     pset_family B;
     register pset p, last, pdest;
     register int j;

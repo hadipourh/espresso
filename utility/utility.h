@@ -31,7 +31,7 @@ extern char *util_strsav ARGS((char *ptr));
 extern char *util_tilde_expand ARGS((char *filename));
 
 #ifndef NIL_FN
-#define NIL_FN(type) ((type(*)())0)
+#define NIL_FN(type) ((type (*)())0)
 #endif /* NIL_FN */
 
 #ifndef MAX

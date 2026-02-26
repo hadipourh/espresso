@@ -41,8 +41,7 @@
 #include "espresso.h"
 
 /* see if the cube has a full row of 1's (with respect to cof) */
-bool full_row(IN register pcube p, IN register pcube cof)
-{
+bool full_row(IN register pcube p, IN register pcube cof) {
     register int i = LOOP(p);
     do
         if ((p[i] | cof[i]) != cube.fullset[i])
@@ -55,8 +54,7 @@ bool full_row(IN register pcube p, IN register pcube cof)
     cdist0 -- return TRUE if a and b are distance 0 apart
 */
 
-bool cdist0(register pcube a, register pcube b)
-{
+bool cdist0(register pcube a, register pcube b) {
     { /* Check binary variables */
         register int w, last;
         register unsigned int x;
@@ -97,8 +95,7 @@ bool cdist0(register pcube a, register pcube b)
     exceeds 1, the value 2 is returned.
 */
 
-int cdist01(register pset a, register pset b)
-{
+int cdist01(register pset a, register pset b) {
     int dist = 0;
 
     { /* Check binary variables */
@@ -143,8 +140,7 @@ int cdist01(register pset a, register pset b)
     number of null variables in their intersection).
 */
 
-int cdist(register pset a, register pset b)
-{
+int cdist(register pset a, register pset b) {
     int dist = 0;
 
     { /* Check binary variables */
@@ -185,8 +181,7 @@ int cdist(register pset a, register pset b)
     force_lower -- Determine which variables of a do not intersect b.
 */
 
-pset force_lower(INOUT pset xlower, IN register pset a, IN register pset b)
-{
+pset force_lower(INOUT pset xlower, IN register pset a, IN register pset b) {
     { /* Check binary variables (if any) */
         register int w, last;
         register unsigned int x;
@@ -235,8 +230,7 @@ pset force_lower(INOUT pset xlower, IN register pset a, IN register pset b)
     represents the consensus when a and b are distance 1 apart.
 */
 
-void consensus(INOUT pcube r, IN register pcube a, IN register pcube b)
-{
+void consensus(INOUT pcube r, IN register pcube a, IN register pcube b) {
     INLINEset_clear(r, cube.size);
 
     { /* Check binary variables (if any) */
@@ -282,8 +276,7 @@ void consensus(INOUT pcube r, IN register pcube a, IN register pcube b)
     the cube, or return -1 if there are none or more than 2.
 */
 
-int cactive(register pcube a)
-{
+int cactive(register pcube a) {
     int active = -1, dist = 0;
 
     { /* Check binary variables */
@@ -333,8 +326,7 @@ int cactive(register pcube a)
     active variables include variables that are empty;
 */
 
-bool ccommon(register pcube a, register pcube b, register pcube cof)
-{
+bool ccommon(register pcube a, register pcube b, register pcube cof) {
     { /* Check binary variables */
         int last;
         register int w;
@@ -392,8 +384,7 @@ bool ccommon(register pcube a, register pcube b, register pcube cof)
 */
 
 /* descend -- comparison for descending sort on set size */
-int descend(const void *a, const void *b)
-{
+int descend(const void *a, const void *b) {
     register pset a1 = *(pset *)a, b1 = *(pset *)b;
     if (SIZE(a1) > SIZE(b1))
         return -1;
@@ -412,8 +403,7 @@ int descend(const void *a, const void *b)
 }
 
 /* ascend -- comparison for ascending sort on set size */
-int ascend(const void *a, const void *b)
-{
+int ascend(const void *a, const void *b) {
     register pset a1 = *(pset *)a, b1 = *(pset *)b;
     if (SIZE(a1) > SIZE(b1))
         return 1;
@@ -432,8 +422,7 @@ int ascend(const void *a, const void *b)
 }
 
 /* lex_order -- comparison for "lexical" ordering of cubes */
-int lex_order(const void *a, const void *b)
-{
+int lex_order(const void *a, const void *b) {
     register pset a1 = *(pset *)a, b1 = *(pset *)b;
     register int i = LOOP(a1);
     do
@@ -446,8 +435,7 @@ int lex_order(const void *a, const void *b)
 }
 
 /* d1_order -- comparison for distance-1 merge routine */
-int d1_order(const void *a, const void *b)
-{
+int d1_order(const void *a, const void *b) {
     register pset a1 = *(pset *)a, b1 = *(pset *)b, c1 = cube.temp[0];
     register int i = LOOP(a1);
     register unsigned int x1, x2;
@@ -463,8 +451,7 @@ int d1_order(const void *a, const void *b)
 /* desc1 -- comparison (without indirection) for descending sort */
 /* also has effect of handling NULL pointers,and a NULL pointer has smallest
 order */
-int desc1(register pset a, register pset b)
-{
+int desc1(register pset a, register pset b) {
     if (a == (pset)NULL)
         return (b == (pset)NULL) ? 0 : 1;
     else if (b == (pset)NULL)

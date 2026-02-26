@@ -92,28 +92,49 @@ struct sm_matrix_struct {
 
 #define sm_get(type, x) ((type)(x->user_word))
 
-extern sm_matrix *sm_alloc(void), *sm_alloc_size(int row, int col), *sm_dup(sm_matrix *A);
-extern void sm_free(sm_matrix *A), sm_delrow(sm_matrix *A, int i), sm_delcol(sm_matrix *A, int i), sm_resize(register sm_matrix *A, int row, int col);
-extern void sm_write(FILE *fp, sm_matrix *A), sm_print(FILE *fp, sm_matrix *A), sm_dump(sm_matrix *A, char *s, int max), sm_cleanup(void);
-extern void sm_copy_row(register sm_matrix *dest, int dest_row, sm_row *prow), sm_copy_col(register sm_matrix *dest, int dest_col, sm_col *pcol);
-extern void sm_remove(sm_matrix *A, int rownum, int colnum), sm_remove_element(register sm_matrix *A, register sm_element *p);
-extern sm_element *sm_insert(register sm_matrix *A, int row, int col), *sm_find(sm_matrix *A, int rownum, int colnum);
+extern sm_matrix *sm_alloc(void), *sm_alloc_size(int row, int col),
+    *sm_dup(sm_matrix *A);
+extern void sm_free(sm_matrix *A), sm_delrow(sm_matrix *A, int i),
+    sm_delcol(sm_matrix *A, int i),
+    sm_resize(register sm_matrix *A, int row, int col);
+extern void sm_write(FILE *fp, sm_matrix *A), sm_print(FILE *fp, sm_matrix *A),
+    sm_dump(sm_matrix *A, char *s, int max), sm_cleanup(void);
+extern void sm_copy_row(register sm_matrix *dest, int dest_row, sm_row *prow),
+    sm_copy_col(register sm_matrix *dest, int dest_col, sm_col *pcol);
+extern void sm_remove(sm_matrix *A, int rownum, int colnum),
+    sm_remove_element(register sm_matrix *A, register sm_element *p);
+extern sm_element *sm_insert(register sm_matrix *A, int row, int col),
+    *sm_find(sm_matrix *A, int rownum, int colnum);
 extern sm_row *sm_longest_row(sm_matrix *A);
 extern sm_col *sm_longest_col(sm_matrix *A);
-extern int sm_read(FILE *fp, sm_matrix **A), sm_read_compressed(FILE *fp, sm_matrix **A);
+extern int sm_read(FILE *fp, sm_matrix **A),
+    sm_read_compressed(FILE *fp, sm_matrix **A);
 
-extern sm_row *sm_row_alloc(void), *sm_row_dup(sm_row *prow), *sm_row_and(sm_row *p1, sm_row *p2);
-extern void sm_row_free(register sm_row *prow), sm_row_remove(register sm_row *prow, register int col), sm_row_print(FILE *fp, sm_row *prow);
-extern sm_element *sm_row_insert(register sm_row *prow, register int col), *sm_row_find(sm_row *prow, int col);
-extern int sm_row_contains(sm_row *p1, sm_row *p2), sm_row_intersects(sm_row *p1, sm_row *p2);
-extern int sm_row_compare(sm_row *p1, sm_row *p2), sm_row_hash(sm_row *prow, int modulus);
+extern sm_row *sm_row_alloc(void), *sm_row_dup(sm_row *prow),
+    *sm_row_and(sm_row *p1, sm_row *p2);
+extern void sm_row_free(register sm_row *prow),
+    sm_row_remove(register sm_row *prow, register int col),
+    sm_row_print(FILE *fp, sm_row *prow);
+extern sm_element *sm_row_insert(register sm_row *prow, register int col),
+    *sm_row_find(sm_row *prow, int col);
+extern int sm_row_contains(sm_row *p1, sm_row *p2),
+    sm_row_intersects(sm_row *p1, sm_row *p2);
+extern int sm_row_compare(sm_row *p1, sm_row *p2),
+    sm_row_hash(sm_row *prow, int modulus);
 
-extern sm_col *sm_col_alloc(void), *sm_col_dup(sm_col *pcol), *sm_col_and(sm_col *p1, sm_col *p2);
-extern void sm_col_free(register sm_col *pcol), sm_col_remove(register sm_col *pcol, register int row), sm_col_print(FILE *fp, sm_col *pcol);
-extern sm_element *sm_col_insert(register sm_col *pcol, register int row), *sm_col_find(sm_col *pcol, int row);
-extern int sm_col_contains(sm_col *p1, sm_col *p2), sm_col_intersects(sm_col *p1, sm_col *p2);
-extern int sm_col_compare(sm_col *p1, sm_col *p2), sm_col_hash(sm_col *pcol, int modulus);
-extern void sm_col_remove_element(register sm_col *pcol, register sm_element *p);
+extern sm_col *sm_col_alloc(void), *sm_col_dup(sm_col *pcol),
+    *sm_col_and(sm_col *p1, sm_col *p2);
+extern void sm_col_free(register sm_col *pcol),
+    sm_col_remove(register sm_col *pcol, register int row),
+    sm_col_print(FILE *fp, sm_col *pcol);
+extern sm_element *sm_col_insert(register sm_col *pcol, register int row),
+    *sm_col_find(sm_col *pcol, int row);
+extern int sm_col_contains(sm_col *p1, sm_col *p2),
+    sm_col_intersects(sm_col *p1, sm_col *p2);
+extern int sm_col_compare(sm_col *p1, sm_col *p2),
+    sm_col_hash(sm_col *pcol, int modulus);
+extern void sm_col_remove_element(register sm_col *pcol,
+                                  register sm_element *p);
 
 extern int sm_row_dominance(sm_matrix *A);
 extern int sm_col_dominance(sm_matrix *A, int *weight);
